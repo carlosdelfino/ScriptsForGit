@@ -1,0 +1,14 @@
+for i in categories hr-xml hradmin hrjobs jobApply jobSearch scripts;
+do 
+    mkdir openhr_$i; 
+    cd openhr_$i; 
+    git cvsimport -v -d:pserver:anonymous@openhr.cvs.sourceforge.net:/cvsroot/openhr $i 
+    git commit -a -m "end import"
+    echo "Project: "$i>README; 
+    git add README; 
+    git commit -m "Commit README";
+    git remote add origin git@github.com:TropeNetwork/$i.git
+    git push --force -u origin master 
+    cd ..
+    echo -e \n\n\n\b
+done
